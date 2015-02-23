@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 	    group.name = "group name1";
 	    group.header = "header 1";
 	    group.footer = "footer 1";
-	    appl.getGroupHelper().fillGroupForm(appl, this, group);
+	    appl.getGroupHelper().fillGroupForm(group);
 	    appl.getGroupHelper().submitGroupCreation();
 	    appl.getNavigationHelper().returnToGroupsPage();
 	  }
@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 		appl.getNavigationHelper().openMainPage();
 		appl.getNavigationHelper().gotoGroupPage();
 		appl.getGroupHelper().initGroupCreation();
-		appl.getGroupHelper().fillGroupForm(appl, this, new GroupData("", "", ""));
+		appl.getGroupHelper().fillGroupForm(new GroupData("", "", ""));
 		appl.getGroupHelper().submitGroupCreation();
 		appl.getNavigationHelper().returnToGroupsPage();
 	  }

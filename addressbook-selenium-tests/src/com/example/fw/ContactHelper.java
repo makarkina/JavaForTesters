@@ -22,7 +22,7 @@ public class ContactHelper extends HelperBase{
 		click(By.linkText("add next"));
 	}
 
-	public void filloutContactForm(ApplicationManager applicationManager, TestBase testBase, ContactData contact){
+	public void filloutContactForm(ContactData contact){
 		type(By.name("firstname"), contact.firstName);
 		type(By.name("lastname"), contact.lastName);
 	    type(By.name("address"), contact.addressPrime);

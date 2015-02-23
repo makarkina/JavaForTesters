@@ -25,7 +25,7 @@ public class ContactCreationTests extends TestBase{
     contactInfo1.addressSec = "Address 2";
     contactInfo1.phoneAdd = "777-8888";
     
-    appl.getContactHelper().filloutContactForm(appl, this, contactInfo1);
+    appl.getContactHelper().filloutContactForm(contactInfo1);
     appl.getContactHelper().submitContactCreation();
     appl.getContactHelper().returnToContactPage();
     
@@ -38,7 +38,7 @@ public class ContactCreationTests extends TestBase{
 	appl.getContactHelper().gotoContactPage();
     
 	ContactData contactInfo2 = new ContactData("", "", "", "", "", "", "", "", "-", "-", "", "", "");
-	appl.getContactHelper().filloutContactForm(appl, this, contactInfo2);
+	appl.getContactHelper().filloutContactForm(contactInfo2);
     appl.getContactHelper().submitContactCreation();
     appl.getContactHelper().returnToContactPage();
   }
