@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 	    group.footer = "footer 1";
 	    appl.getGroupHelper().fillGroupForm(group);
 	    appl.getGroupHelper().submitGroupCreation();
-	    appl.getNavigationHelper().returnToGroupsPage();
+	    appl.getGroupHelper().returnToGroupsPage();
 	  }
 	  
 	  @Test
@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 		appl.getGroupHelper().initGroupCreation();
 		appl.getGroupHelper().fillGroupForm(new GroupData("", "", ""));
 		appl.getGroupHelper().submitGroupCreation();
-		appl.getNavigationHelper().returnToGroupsPage();
+		appl.getGroupHelper().returnToGroupsPage();
 	  }
 	  
 	}
