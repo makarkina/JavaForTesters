@@ -1,7 +1,12 @@
 package com.example.fw;
 
-import org.openqa.selenium.By;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import com.example.tests.ContactData;
 import com.example.tests.ContactData;
 import com.example.tests.TestBase;
 
@@ -45,7 +50,7 @@ public class ContactHelper extends HelperBase{
 	}
 
 	private void editContactByIndex(int index) {
-		click(By.cssSelector("#maintable tr:nth-of-type(" + index + ")" + " img[alt='Edit']"));
+		click(By.cssSelector("#maintable tr:nth-of-type(" + (index + 1) + ")" + " img[alt='Edit']"));
 	}
 
 	public void initContactModification(int index) {
@@ -56,6 +61,19 @@ public class ContactHelper extends HelperBase{
 	public void submitContactModification() {
 		click(By.cssSelector("#content input[value='Update']"));
 		
+	}
+
+	public List<ContactData> getContacts() {
+		List<ContactData> contacts = new ArrayList<ContactData>();
+		List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
+		
+		for (WebElement checkbox : checkboxes) {
+			ContactData contact = new ContactData();
+			String ident = checkbox.getAttribute("alt");
+			contact.firstAndLastName = ident.substring("Select (".length(), ident.length() - ")".length());
+			contacts.add(contact);
+		}
+		return contacts;
 	}
 	
 }
