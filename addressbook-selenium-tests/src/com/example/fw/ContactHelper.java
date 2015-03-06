@@ -2,13 +2,9 @@ package com.example.fw;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import com.example.tests.ContactData;
-import com.example.tests.ContactData;
-import com.example.tests.TestBase;
 
 public class ContactHelper extends HelperBase{
 
@@ -65,15 +61,19 @@ public class ContactHelper extends HelperBase{
 
 	public List<ContactData> getContacts() {
 		List<ContactData> contacts = new ArrayList<ContactData>();
-		List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
+		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='maintable']//tr"));
+		rows.remove(0);
+		rows.remove(rows.size()-1);
 		
-		for (WebElement checkbox : checkboxes) {
-			ContactData contact = new ContactData();
-			String ident = checkbox.getAttribute("alt");
-			contact.firstAndLastName = ident.substring("Select (".length(), ident.length() - ")".length());
-			contacts.add(contact);
+		//System.out.println(rows.size());
+		for (WebElement row : rows) {
+		    ContactData contact = new ContactData();
+		    contact.firstName = row.findElement(By.xpath(".//td[3]")).getText();
+		    contact.lastName = row.findElement(By.xpath(".//td[2]")).getText();
+		    contacts.add(contact);
 		}
 		return contacts;
 	}
+	
 	
 }

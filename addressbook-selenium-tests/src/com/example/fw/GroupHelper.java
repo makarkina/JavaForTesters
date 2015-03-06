@@ -1,12 +1,12 @@
 package com.example.fw;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import com.example.tests.GroupData;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class GroupHelper extends HelperBase{
@@ -39,8 +39,8 @@ public class GroupHelper extends HelperBase{
 		
 	}
 
-	private void selectGroupByIndex(int index) {
-		click(By.xpath("//input[@name='selected[]'][" + (index + 1) + "]"));
+	public void selectGroupByIndex(int index) {
+		click(By.xpath("//input[@name='selected[]'][" + (index+1) + "]"));
 	}
 
 	public void initGroupModification(int index) {
@@ -65,5 +65,4 @@ public class GroupHelper extends HelperBase{
 		}
 		return groups;
 	}
-
 }
