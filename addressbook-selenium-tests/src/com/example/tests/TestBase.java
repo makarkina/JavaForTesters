@@ -32,11 +32,11 @@ public class TestBase {
 		List<Object[]> list = new ArrayList<Object[]>();
 		
 		for (int i = 0; i < 5; i++){
-			GroupData group = new GroupData();
-			group.name = generateRandomString();
-		    group.header = generateRandomString();
-		    group.footer = generateRandomString();
-		    list.add(new Object[]{group});
+			GroupData group = new GroupData()
+			.withName(generateRandomString())
+			.withHeader(generateRandomString())
+			.withFooter(generateRandomString());
+			list.add(new Object[]{group});
 		}
 		return list.iterator();
 	}
@@ -55,7 +55,7 @@ public class TestBase {
 	public Iterator<Object[]> randomValidContactGenerator(){
 		List<Object[]> list = new ArrayList<Object[]>();
 		
-		for (int i = 0; i < 3; i++){
+		for (int i = 0; i < 1; i++){
 			ContactData contact = new ContactData();
 			contact.firstName = generateRandomStringName();
 			contact.lastName = generateRandomStringName();

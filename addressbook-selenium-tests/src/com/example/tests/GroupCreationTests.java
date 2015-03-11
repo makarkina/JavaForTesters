@@ -9,20 +9,16 @@ import org.testng.annotations.Test;
 	
 	@Test(dataProvider = "randomValidGroupGenerator")
 	  	public void testGroupCreationWithValidData(GroupData group) throws Exception {
-		appl.getNavigationHelper().openMainPage();
-		appl.getNavigationHelper().gotoGroupPage();
+		
+		appl.navigateTo().mainPage();
+		appl.navigateTo().groupsPage();
 		
 		// save old state
 		List<GroupData> oldList = appl.getGroupHelper().getGroups();
-		System.out.print(oldList);
 		
 		// actions
-		appl.getGroupHelper().initGroupCreation();
-		appl.getGroupHelper().fillGroupForm(group);
-	    appl.getGroupHelper().submitGroupCreation();
-	    appl.getGroupHelper().returnToGroupsPage();
-	    appl.getGroupHelper().rebuildCache();
-	    
+		appl.getGroupHelper().createGroup(group);
+			    
 	    // save new state
 	    List<GroupData> newList = appl.getGroupHelper().getGroups();
 	    	    
