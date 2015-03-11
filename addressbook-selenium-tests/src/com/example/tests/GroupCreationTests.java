@@ -14,12 +14,14 @@ import org.testng.annotations.Test;
 		
 		// save old state
 		List<GroupData> oldList = appl.getGroupHelper().getGroups();
+		System.out.print(oldList);
 		
 		// actions
 		appl.getGroupHelper().initGroupCreation();
 		appl.getGroupHelper().fillGroupForm(group);
 	    appl.getGroupHelper().submitGroupCreation();
 	    appl.getGroupHelper().returnToGroupsPage();
+	    appl.getGroupHelper().rebuildCache();
 	    
 	    // save new state
 	    List<GroupData> newList = appl.getGroupHelper().getGroups();

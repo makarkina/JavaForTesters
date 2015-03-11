@@ -55,7 +55,7 @@ public class TestBase {
 	public Iterator<Object[]> randomValidContactGenerator(){
 		List<Object[]> list = new ArrayList<Object[]>();
 		
-		for (int i = 0; i < 1; i++){
+		for (int i = 0; i < 3; i++){
 			ContactData contact = new ContactData();
 			contact.firstName = generateRandomStringName();
 			contact.lastName = generateRandomStringName();

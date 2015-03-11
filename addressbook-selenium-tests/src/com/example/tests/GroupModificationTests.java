@@ -1,5 +1,6 @@
 package com.example.tests;
 import static org.testng.Assert.assertEquals;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -25,6 +26,7 @@ public class GroupModificationTests extends TestBase {
 			appl.getGroupHelper().fillGroupForm(group);
 			appl.getGroupHelper().submitGroupModification();
 			appl.getGroupHelper().returnToGroupsPage();
+			appl.getGroupHelper().rebuildCache();
 			
 			// save new state
 		    List<GroupData> newList = appl.getGroupHelper().getGroups();
@@ -32,6 +34,9 @@ public class GroupModificationTests extends TestBase {
 		    // compare states	      
 		    oldList.remove(index);
 		    oldList.add(group);
+		    System.out.print("new " + newList.size());
+		    System.out.println("");
+		    System.out.print("old " + oldList.size());
 		    Collections.sort(oldList);
 		    assertEquals(newList, oldList);
 		}

@@ -11,19 +11,29 @@ public class ContactHelper extends HelperBase{
 	public ContactHelper(ApplicationManager manager) {
 		super(manager);
 	}
-
-	public void gotoContactPage() {
-		click(By.linkText("add new"));
+	
+	private List<ContactData> cachedContacts;
+	
+	public List<ContactData> getContacts() {
+	if (cachedContacts == null){
+		rebuildCache();
+		}
+		return new ArrayList<ContactData>(cachedContacts);
 	}
 
-	public void submitContactCreation() {
-		click(By.name("submit"));
+	public void rebuildCache() {
+		cachedContacts = new ArrayList<ContactData>();
+		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='maintable']//tr"));
+		rows.remove(0);
+		rows.remove(rows.size()-1);
+		for (WebElement row : rows) {
+		    ContactData contact = new ContactData();
+		    contact.firstName = row.findElement(By.xpath(".//td[3]")).getText();
+		    contact.lastName = row.findElement(By.xpath(".//td[2]")).getText();
+		    cachedContacts.add(contact);
+		}
 	}
 	
-	public void returnToContactPage() {
-		click(By.linkText("add next"));
-	}
-
 	public void filloutContactForm(ContactData contact){
 		type(By.name("firstname"), contact.firstName);
 		type(By.name("lastname"), contact.lastName);
@@ -39,41 +49,36 @@ public class ContactHelper extends HelperBase{
 	    type(By.name("address2"), contact.addressSec);
 	    type(By.name("phone2"), contact.phoneAdd);
 	  }
-
-	public void deleteContact(int index) {
-		editContactByIndex(index);
-		click(By.cssSelector("#content input[value='Delete']"));
+	
+	public void gotoContactPage() {
+		click(By.linkText("add new"));
 	}
 
-	private void editContactByIndex(int index) {
-		click(By.cssSelector("#maintable tr:nth-of-type(" + (index + 1) + ")" + " img[alt='Edit']"));
+	public void returnToContactPage() {
+		click(By.linkText("add next"));
 	}
 
 	public void initContactModification(int index) {
 		editContactByIndex(index);
-		
+	}
+	
+	public void editContactByIndex(int index) {
+		click(By.cssSelector("#maintable tr:nth-of-type(" + (index + 2) + ")" + " img[alt='Edit']"));
+	}
+	
+	public void submitContactCreation() {
+		click(By.name("submit"));
+		cachedContacts = null;
 	}
 
 	public void submitContactModification() {
 		click(By.cssSelector("#content input[value='Update']"));
-		
-	}
-
-	public List<ContactData> getContacts() {
-		List<ContactData> contacts = new ArrayList<ContactData>();
-		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='maintable']//tr"));
-		rows.remove(0);
-		rows.remove(rows.size()-1);
-		
-		//System.out.println(rows.size());
-		for (WebElement row : rows) {
-		    ContactData contact = new ContactData();
-		    contact.firstName = row.findElement(By.xpath(".//td[3]")).getText();
-		    contact.lastName = row.findElement(By.xpath(".//td[2]")).getText();
-		    contacts.add(contact);
-		}
-		return contacts;
+		cachedContacts = null;
 	}
 	
+	public void submitContactDeletion() {
+		click(By.cssSelector("#content input[value='Delete']"));
+		cachedContacts = null;
+	}
 	
 }

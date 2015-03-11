@@ -13,12 +13,12 @@ public void testContactCreationWithValidData(ContactData contact) throws Excepti
 	appl.getNavigationHelper().openMainPage();
 	// save old state
 	List<ContactData> oldList = appl.getContactHelper().getContacts();	
-	//System.out.print("old list1 " + oldList);
-	 
+		 
     appl.getContactHelper().gotoContactPage();
 	appl.getContactHelper().filloutContactForm(contact);
     appl.getContactHelper().submitContactCreation();
     appl.getNavigationHelper().returnToMainPage();
+    appl.getContactHelper().rebuildCache();
     
     // save new state
     List<ContactData> newList = appl.getContactHelper().getContacts();

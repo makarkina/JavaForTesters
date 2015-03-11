@@ -23,6 +23,7 @@ public class ContactModificationTests extends TestBase{
 			appl.getContactHelper().filloutContactForm(contact);
 			appl.getContactHelper().submitContactModification();
 			appl.getNavigationHelper().returnToMainPage();
+			appl.getContactHelper().rebuildCache();
 			
 			// save new state
 		    List<ContactData> newList = appl.getContactHelper().getContacts();
