@@ -1,39 +1,36 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
-import java.util.Collections;
-import java.util.List;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
+
 import java.util.Random;
+
 import org.testng.annotations.Test;
+
+import com.example.utils.ListOf;
+import com.example.utils.SortedListOf;
 
 public class ContactModificationTests extends TestBase{
 
 		@Test(dataProvider = "randomValidContactGenerator")
 		public void modifySomeContact(ContactData contact){
-			appl.navigateTo().mainPage();
-						
+					
 			// save old state
-			List<ContactData> oldList = appl.getContactHelper().getContacts();
-			
+			ListOf<ContactData> oldList = appl.getContactHelper().getContacts();
+						
 			Random rnd = new Random();
 			int index = rnd.nextInt(oldList.size()-1);
 						
 			//actions
-			appl.getContactHelper().initContactModification(index);
-			appl.getContactHelper().filloutContactForm(contact);
-			appl.getContactHelper().submitContactModification();
-			appl.navigateTo().returnToMainPage();
-			
+			appl.getContactHelper().modifyContact(index, contact);
+						
 			// save new state
-		    List<ContactData> newList = appl.getContactHelper().getContacts();
-		    Collections.sort(newList);
-		    
+			ListOf<ContactData> newList = appl.getContactHelper().getContacts();
+			SortedListOf<ContactData> newSortedList = new SortedListOf<ContactData>(newList);
+			SortedListOf<ContactData> oldSortedList = new SortedListOf<ContactData>(oldList.without(index).withAdded(contact));
+			
 		    // compare states	      
-		    oldList.remove(index);
-		    oldList.add(contact);
-		    Collections.sort(oldList);
-		    assertEquals(newList, oldList);
+			assertThat(newSortedList, equalTo(oldSortedList));
 		}
-
 	
 }

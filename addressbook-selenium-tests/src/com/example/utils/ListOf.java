@@ -1,8 +1,11 @@
 package com.example.utils;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.example.tests.ContactData;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 
@@ -16,7 +19,7 @@ public class ListOf<T> extends ForwardingList<T> {
   public ListOf(ListOf<T> listToCopy) {
     list = Lists.newArrayList(listToCopy);
   }
-
+ 
   @Override
   protected List<T> delegate() {
     return list;
@@ -29,10 +32,17 @@ public class ListOf<T> extends ForwardingList<T> {
     return newItems;
   }
 
-  public ListOf<T> without(T item) {
+  public ListOf<T> withAdded(T item) {
+	    ListOf<T> newItems = new ListOf<T>();
+	    newItems.list = Lists.newArrayList(this.list);
+	    newItems.list.add(item);
+	    return newItems;
+	  }
+  
+  public ListOf<T> without(int index) {
     ListOf<T> newItems = new ListOf<T>();
     newItems.list = Lists.newArrayList(this.list);
-    newItems.list.remove(item);
+    newItems.list.remove(index);
     return newItems;
   }
 
@@ -51,4 +61,5 @@ public class ListOf<T> extends ForwardingList<T> {
       return list.get(new Random().nextInt(size()));
     }
   }
+
 }
