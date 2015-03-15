@@ -1,0 +1,46 @@
+package com.example2.fw;
+
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class ApplicationManager {
+	
+	public WebDriver driver;
+	public String baseUrl;
+		
+	private NavigationHelper navigationHelper;
+	private ContactHelper contactHelper;
+
+	public ApplicationManager(){
+		
+		driver = new FirefoxDriver();
+	    baseUrl = "http://localhost/";
+	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    driver.get(baseUrl + "/addressbookv4.1.4/");
+	}
+	
+	public void stop() {
+		driver.quit();
+	    
+	}
+	
+		
+	public NavigationHelper navigateTo() 
+	{
+		if (navigationHelper == null) {
+			navigationHelper = new NavigationHelper(this);
+		}
+		return navigationHelper;
+	}
+		
+	public ContactHelper getContactHelper() 
+	{
+		if (contactHelper == null) {
+			contactHelper = new ContactHelper(this);
+		}
+		return contactHelper;
+	}
+}
+
+

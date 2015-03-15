@@ -1,4 +1,4 @@
-package com.example.tests;
+package com.example2.tests;
 
 public class ContactData implements Comparable<ContactData>{
 	
@@ -30,21 +30,21 @@ public class ContactData implements Comparable<ContactData>{
 		this.lastName  = lastName;
 		this.addressPrime = addressPrime;
 		this.homePhone = homePhone;
-		this.setCellPhone(cellPhone);
-		this.setWorkPhone(workPhone);
+		this.cellPhone = cellPhone;
+		this.workPhone = workPhone;
 		this.emailPrime = emailPrime;
-		this.setEmailSecond(emailSecond);
+		this.emailSecond = emailSecond;
 		this.birthDay = birthDay;
 		this.birthMonth = birthMonth;
 		this.birthYear = birthYear;
-		this.setAddressSec(addressSec);
-		this.setPhoneAdd(phoneAdd);
+		this.addressSec = addressSec;
+		this.phoneAdd = phoneAdd;
 	}
 
 	@Override
 	public String toString() {
 		return "ContactData [firstName=" + firstName + ", lastName=" + lastName
-				+ ", emailPrime=" + emailPrime + ", homePhone=" + homePhone + "]";
+				+ ", homePhone=" + homePhone + "]";
 	}
 
 	@Override
@@ -77,11 +77,6 @@ public class ContactData implements Comparable<ContactData>{
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (emailPrime == null) {
-			if (other.emailPrime != null)
-				return false;
-		} else if (!emailPrime.equals(other.emailPrime))
-			return false;
 		if (homePhone == null) {
 			if (other.homePhone != null)
 				return false;
@@ -92,8 +87,8 @@ public class ContactData implements Comparable<ContactData>{
 
 	@Override
 	public int compareTo(ContactData other) {
-		String s = this.firstName+this.lastName+this.emailPrime+this.homePhone; 
-		return s.toLowerCase().compareTo((other.firstName + other.lastName + other.emailPrime + other.homePhone).toLowerCase());
+		String s = this.firstName+this.lastName+this.homePhone; 
+		return s.toLowerCase().compareTo((other.firstName + other.lastName + other.homePhone).toLowerCase());
 	}
 
 	public ContactData withFirstName(String firstName) {
@@ -112,7 +107,7 @@ public class ContactData implements Comparable<ContactData>{
 	}
 
 	public ContactData withAddressSec(String addressSec) {
-		this.setAddressSec(addressSec);
+		this.addressSec = addressSec;
 		return this;
 	}
 
@@ -122,7 +117,7 @@ public class ContactData implements Comparable<ContactData>{
 	}
 
 	public ContactData withEmailSecond(String emailSecond) {
-		this.setEmailSecond(emailSecond);		
+		this.emailSecond = emailSecond;		
 		return this;
 	}
 
@@ -147,17 +142,17 @@ public class ContactData implements Comparable<ContactData>{
 	}
 
 	public ContactData withCellPhone(String cellPhone) {
-		this.setCellPhone(cellPhone);	
+		this.cellPhone = cellPhone;	
 		return this;
 	}
 
 	public ContactData withWorkPhone(String workPhone) {
-		this.setWorkPhone(workPhone);
+		this.workPhone = workPhone;
 		return this;
 	}
 
 	public ContactData withPhoneAdd(String phoneAdd) {
-		this.setPhoneAdd(phoneAdd);	
+		this.phoneAdd = phoneAdd;	
 		return this;
 	}
 
@@ -211,26 +206,6 @@ public class ContactData implements Comparable<ContactData>{
 
 	public String getPhoneAdd() {
 		return phoneAdd;
-	}
-
-	public void setCellPhone(String cellPhone) {
-		this.cellPhone = cellPhone;
-	}
-
-	public void setWorkPhone(String workPhone) {
-		this.workPhone = workPhone;
-	}
-
-	public void setEmailSecond(String emailSecond) {
-		this.emailSecond = emailSecond;
-	}
-
-	public void setAddressSec(String addressSec) {
-		this.addressSec = addressSec;
-	}
-
-	public void setPhoneAdd(String phoneAdd) {
-		this.phoneAdd = phoneAdd;
 	}
 
 }

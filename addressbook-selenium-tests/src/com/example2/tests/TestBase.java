@@ -1,4 +1,4 @@
-package com.example.tests;
+package com.example2.tests;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,7 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
-import com.example.fw.ApplicationManager;
+import com.example2.fw.ApplicationManager;
 
 public class TestBase {
 
@@ -26,53 +26,40 @@ public class TestBase {
 		appl.stop();
 	
 	  }
-		
-	@DataProvider
-	public Iterator<Object[]> randomValidGroupGenerator(){
-		List<Object[]> list = new ArrayList<Object[]>();
-		
-		for (int i = 0; i < 5; i++){
-			GroupData group = new GroupData()
-			.withName(generateRandomString())
-			.withHeader(generateRandomString())
-			.withFooter(generateRandomString());
-			list.add(new Object[]{group});
-		}
-		return list.iterator();
-	}
-
-	public String generateRandomString(){
-		Random rnd = new Random();
-		if (rnd.nextInt(3) == 0){
-			return "";
-		}
-		else {
-			return "test" + rnd.nextInt();
-		}
-	}
 
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator(){
 		List<Object[]> list = new ArrayList<Object[]>();
 		
-		for (int i = 0; i < 3; i++){
+		for (int i = 0; i < 2; i++){
 			ContactData contact = new ContactData()
-			.withFirstName(generateRandomStringName())
+			.withFirstName(generateRandomStringFirstName())
 			.withLastName(generateRandomStringName())
 			.withAddressPrime(generateRandomStringAddress())
+			.withAddressSec(generateRandomStringAddress())
 			.withEmailPrime(generateRandomStringEmail())
+			.withEmailSecond(generateRandomStringEmail())
 			.withBirthDay(generateRandomStringBirthDay())
 			.withBirthMonth(generateRandomStringMonth())
 			.withBirthYear(generateRandomStringYear())
-			.withHomePhone(generateRandomStringPhone());
-			contact.setAddressSec("Address2");
-			contact.setEmailSecond("email4@gmail.com");
-			contact.setCellPhone("333-555");
-			contact.setWorkPhone("777-666");
-			contact.setPhoneAdd("555-888");
+			.withHomePhone(generateRandomStringPhone())
+			.withCellPhone(generateRandomStringPhone())
+			.withWorkPhone(generateRandomStringPhone())
+			.withPhoneAdd(generateRandomStringPhone());
+			
 		    list.add(new Object[]{contact});
 		}
 		return list.iterator();
+	}
+	
+	public String generateRandomStringFirstName(){
+		Random rnd = new Random();
+		if (rnd.nextInt(3) == 0){
+			return "";
+		}
+		else {
+			return "first" + rnd.nextInt();
+		}
 	}
 
 	public String generateRandomStringName(){

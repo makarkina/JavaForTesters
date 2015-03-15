@@ -11,6 +11,7 @@ public class ContactCreationTests extends TestBase{
 public void testContactCreationWithValidData(ContactData contact) throws Exception{
 	
 	// save old state
+		
 	ListOf<ContactData> oldList = appl.getContactHelper().getContacts();
 			 
     appl.getContactHelper().createContact(contact);
