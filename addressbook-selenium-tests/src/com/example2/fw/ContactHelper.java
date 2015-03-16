@@ -1,11 +1,18 @@
 package com.example2.fw;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import com.example.utils.ListOf;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.testng.util.Strings;
+
 import com.example2.tests.ContactData;
-import com.google.common.base.Strings;
+import com.example.utils.ListOf;
 
 public class ContactHelper extends HelperBase{
 
@@ -15,35 +22,35 @@ public class ContactHelper extends HelperBase{
 	
 	private ListOf<ContactData> cachedContacts;
 	private ListOf<ContactData> printedContacts;
-		
+	
 	public ListOf<ContactData> getContacts() {
 		if (cachedContacts == null){
 			rebuildCach();
 		}
 		return new ListOf<ContactData>(cachedContacts);
 	}
+	
 		private void rebuildCach() {
 			cachedContacts = new ListOf<ContactData>();
 			
 			manager.navigateTo().mainPage();
 			List<WebElement> rows = driver.findElements(By.xpath("//table[@id='maintable']//tr[@name='entry']"));
-			//System.out.println("rows " + rows.size());			
+						
+			//System.out.println(rows.size());
 			for (WebElement row : rows) {
 			    String firstName = row.findElement(By.xpath(".//td[3]")).getText();
 			    String lastName = row.findElement(By.xpath(".//td[2]")).getText();
 			    String homePhone = row.findElement(By.xpath(".//td[5]")).getText();
-			    
 			    cachedContacts.add(new ContactData()
-			       			.withFirstName(firstName)
-			       			.withLastName(lastName)
-			       			.withHomePhone(homePhone));
+			    .withFirstName(firstName)
+			    .withLastName(lastName)
+			    .withHomePhone(homePhone));
 			}
-		}	
-		
+	}	
 		public ListOf<ContactData> getPrintedContacts() {
 			printedContacts = new ListOf<ContactData>();
-			
 			manager.navigateTo().printPhonesPage();
+			waitPage();			
 			List<WebElement> cells = driver.findElements(By.xpath("html/body/div/div[1]/table//td"));
 					
 			for (WebElement cell : cells) {
@@ -86,19 +93,22 @@ public class ContactHelper extends HelperBase{
 			    	}	
 			    	
 			    }
-			    if ((!element[i].isEmpty() && element[i].startsWith("H: ")) 
-			    	|| (Strings.isNullOrEmpty(homePhone) && element[i].startsWith("M: "))){
-			    	homePhone = element[i].substring(2).trim();
+			    if ((!element[1].isEmpty() && (element[1].startsWith("H: ")) 
+			    	|| element[1].startsWith("M: "))){
+			    	homePhone = element[1].substring(2).trim();
 			    }
+			    
 			}
 				printedContacts.add(new ContactData()
    					.withFirstName(firstName)
    					.withLastName(lastName)
    					.withHomePhone(homePhone));
+								
 			}
 			return new ListOf<ContactData>(printedContacts);
- 		}   
 			
+ 		}   
+
 	public ContactHelper createContact(ContactData contact) {
 		manager.navigateTo().mainPage();
 		gotoContactPage();
@@ -108,6 +118,7 @@ public class ContactHelper extends HelperBase{
 	    rebuildCach();
 	    return this;
 	}
+	
 	
 	public ContactHelper modifyContact(int index, ContactData contact) {
 		initContactModification(index);
@@ -178,10 +189,25 @@ public class ContactHelper extends HelperBase{
 		return this;
 	}
 	
-	private void submitContactDeletion() {
+	public ContactHelper submitContactDeletion() {
 		click(By.cssSelector("#content input[value='Delete']"));
 		cachedContacts = null;
+		return this;
 	}
 	
-}
+	public ContactHelper returnToMainPageFromPrintedPhones() {
+		driver.get("//localhost/addressbookv4.1.4/");
+		return this;
+	}
+
+	private void waitPage() {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withMessage("Element was not found").withTimeout(20, TimeUnit.SECONDS)
+				.pollingEvery(1, TimeUnit.SECONDS);
+			    wait.until(ExpectedConditions.presenceOfElementLocated(By.id("footer")));
+	}
+	/*public void waitPage(){
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}*/
 	
+}

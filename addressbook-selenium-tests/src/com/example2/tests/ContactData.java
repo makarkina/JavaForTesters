@@ -207,5 +207,26 @@ public class ContactData implements Comparable<ContactData>{
 	public String getPhoneAdd() {
 		return phoneAdd;
 	}
+	
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
+	}
+
+	public void setWorkPhone(String workPhone) {
+		this.workPhone = workPhone;
+	}
+
+	public void setEmailSecond(String emailSecond) {
+		this.emailSecond = emailSecond;
+	}
+
+	public void setAddressSec(String addressSec) {
+		this.addressSec = addressSec;
+	}
+
+	public void setPhoneAdd(String phoneAdd) {
+		this.phoneAdd = phoneAdd;
+	}
+
 
 }

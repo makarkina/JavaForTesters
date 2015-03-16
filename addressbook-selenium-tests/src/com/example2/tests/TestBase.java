@@ -9,6 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
+import com.example2.tests.ContactData;
 import com.example2.fw.ApplicationManager;
 
 public class TestBase {
@@ -31,21 +32,21 @@ public class TestBase {
 	public Iterator<Object[]> randomValidContactGenerator(){
 		List<Object[]> list = new ArrayList<Object[]>();
 		
-		for (int i = 0; i < 2; i++){
+		for (int i = 0; i < 3; i++){
 			ContactData contact = new ContactData()
 			.withFirstName(generateRandomStringFirstName())
 			.withLastName(generateRandomStringName())
 			.withAddressPrime(generateRandomStringAddress())
-			.withAddressSec(generateRandomStringAddress())
 			.withEmailPrime(generateRandomStringEmail())
-			.withEmailSecond(generateRandomStringEmail())
 			.withBirthDay(generateRandomStringBirthDay())
 			.withBirthMonth(generateRandomStringMonth())
 			.withBirthYear(generateRandomStringYear())
-			.withHomePhone(generateRandomStringPhone())
-			.withCellPhone(generateRandomStringPhone())
-			.withWorkPhone(generateRandomStringPhone())
-			.withPhoneAdd(generateRandomStringPhone());
+			.withHomePhone(generateRandomStringPhone());
+			contact.setAddressSec("Address2");
+			contact.setEmailSecond("email4@gmail.com");
+			contact.setCellPhone("333-555");
+			contact.setWorkPhone("777-666");
+			contact.setPhoneAdd("555-888");
 			
 		    list.add(new Object[]{contact});
 		}
