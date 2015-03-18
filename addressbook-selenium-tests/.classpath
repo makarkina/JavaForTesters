@@ -46,5 +46,20 @@
 	<classpathentry kind="lib" path="C:/selenium-java-2.44.0/selenium-2.44.0/libs/xalan-2.7.1.jar"/>
 	<classpathentry kind="lib" path="C:/selenium-java-2.44.0/selenium-2.44.0/libs/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/selenium-java-2.44.0/selenium-2.44.0/libs/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/xstream"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/cglib-nodep-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/jdom-1.1.3.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/jdom2-2.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/jettison-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/joda-time-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/kxml2-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/kxml2-min-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/stax-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/wstx-asl-3.2.7.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/xmlpull-1.1.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/xom-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/xstream-distribution-1.4.8-bin/xstream-1.4.8/lib/xstream/xpp3_min-1.1.4c.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

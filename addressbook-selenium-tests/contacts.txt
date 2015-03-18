@@ -1,0 +1,8 @@
+test-1395954544,test1674832293,Adress549699730,62-230,43-716,27-221,11,November,2018,email0@gmail.com,email8@gmail.com,Adress-456847545,43-604,!
+test544329409,test-1244291770,Adress965207964,35-641,80-251,46-180,18,May,2018,email1@gmail.com,email3@gmail.com,Adress-912149963,50-008,!
+,test1412089430,Adress-1376100506,44-104,28-411,47-414,15,June,2012,email6@gmail.com,email9@gmail.com,,50-170,!
+,test-1170371126,,47-178,43-234,63-024,13,July,2015,email0@gmail.com,email6@gmail.com,Adress2121831438,23-021,!
+test-1849534150,test1627140566,Adress1107604919,55-310,66-446,13-470,21,November,2018,email4@gmail.com,email9@gmail.com,Adress-1033138261,24-803,!
+test1684411008,test892580347,Adress-279296792,65-140,13-582,48-108,25,May,2013,email6@gmail.com,email0@gmail.com,Adress-778312798,44-283,!
+,test1518121432,,32-372,72-108,14-703,21,July,2018,email9@gmail.com,email1@gmail.com,,26-517,!
+test-592944938,test-1050967832,Adress-1892817617,47-355,80-886,80-024,28,February,2018,email3@gmail.com,email1@gmail.com,Adress1157782673,,!
