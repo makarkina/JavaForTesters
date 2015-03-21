@@ -1,13 +1,10 @@
 package com.example.tests;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
 
@@ -18,7 +15,6 @@ public class TestBase {
 	@BeforeTest
 	public void setUp() throws Exception {
 	    appl = new ApplicationManager();
-	    
 	  }
 	
 	@AfterTest
@@ -26,134 +22,21 @@ public class TestBase {
 		appl.stop();
 	
 	  }
-		
-	@DataProvider
-	public Iterator<Object[]> randomValidGroupGenerator(){
+	
+	public static List<Object[]> wrapGroupsForDataProvider(List<GroupData> groups) {
 		List<Object[]> list = new ArrayList<Object[]>();
-		
-		for (int i = 0; i < 5; i++){
-			GroupData group = new GroupData()
-			.withName(generateRandomString())
-			.withHeader(generateRandomString())
-			.withFooter(generateRandomString());
+		for (GroupData group : groups){
 			list.add(new Object[]{group});
 		}
-		return list.iterator();
+		return list;
 	}
-
-	public String generateRandomString(){
-		Random rnd = new Random();
-		if (rnd.nextInt(3) == 0){
-			return "";
-		}
-		else {
-			return "test" + rnd.nextInt();
-		}
-	}
-
-	@DataProvider
-	public Iterator<Object[]> randomValidContactGenerator(){
+	
+	public static List<Object[]> wrapContactsForDataProvider(List<ContactData> contacts) {
 		List<Object[]> list = new ArrayList<Object[]>();
-		
-		for (int i = 0; i < 3; i++){
-			ContactData contact = new ContactData()
-			.withFirstName(generateRandomStringName())
-			.withLastName(generateRandomStringName())
-			.withAddressPrime(generateRandomStringAddress())
-			.withEmailPrime(generateRandomStringEmail())
-			.withBirthDay(generateRandomStringBirthDay())
-			.withBirthMonth(generateRandomStringMonth())
-			.withBirthYear(generateRandomStringYear())
-			.withHomePhone(generateRandomStringPhone());
-			contact.setAddressSec("Address2");
-			contact.setEmailSecond("email4@gmail.com");
-			contact.setCellPhone("333-555");
-			contact.setWorkPhone("777-666");
-			contact.setPhoneAdd("555-888");
-		    list.add(new Object[]{contact});
+		for (ContactData contact : contacts){
+			list.add(new Object[]{contact});
 		}
-		return list.iterator();
+		return list;
 	}
 
-	public String generateRandomStringName(){
-		Random rnd = new Random();
-		if (rnd.nextInt(3) == 0){
-			return "";
-		}
-		else {
-			return "test" + rnd.nextInt();
-		}
-	}
-	
-	public String generateRandomStringAddress(){
-	Random rnd = new Random();
-	if(rnd.nextInt(3) == 0){
-		return "";
-	}
-	else {
-		return "Adress" + rnd.nextInt();
-		}
-	}
-	
-	public String generateRandomStringEmail(){
-	Random rnd = new Random();
-	if(rnd.nextInt(10) == 0){
-		return "";
-	}
-	else {
-		return "email" + rnd.nextInt(10) + "@gmail.com";
-		}
-	}
-	
-	public String generateRandomStringBirthDay(){
-		Random rnd = new Random();
-		String birhDay = Integer.toString(rnd.nextInt(30)+1);
-		return birhDay;
-	}
-	
-	public String generateRandomStringMonth(){
-		List<String> listMonths = new ArrayList<String>();
-			listMonths.add("January");
-			listMonths.add("February");
-			listMonths.add("March");
-			listMonths.add("April");
-			listMonths.add("May");
-			listMonths.add("June");
-			listMonths.add("July");
-			listMonths.add("August");
-			listMonths.add("September");
-			listMonths.add("October");
-			listMonths.add("November");
-			listMonths.add("December");
-		Random rnd = new Random();
-		String month = listMonths.get(rnd.nextInt(11));
-		return month;	
-	}
-	
-	public String generateRandomStringDigit(){
-		Random rnd = new Random();
-		String digit = Integer.toString(rnd.nextInt(9));
-		return digit;
-	}
-	
-	public String generateRandomStringPhone(){
-		List<String> listDigit = new ArrayList<String>();
-		for(int i=0; i < 5; i++){
-		String n = generateRandomStringDigit();
-		listDigit.add(n); 
-		
-	}
-		if (Integer.parseInt(listDigit.get(0)) == 0){
-			return "";
-		}
-		else {
-			return listDigit.get(0)+listDigit.get(1)+"-"+listDigit.get(2)+listDigit.get(3)+listDigit.get(4);
-		}
-		
-	}
-	public String generateRandomStringYear(){
-		String digit = generateRandomStringDigit();
-		return "201"+ digit;
-	
-	}
 }

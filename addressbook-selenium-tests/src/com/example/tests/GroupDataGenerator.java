@@ -16,6 +16,7 @@ public class GroupDataGenerator {
 	public static void main(String[] args) throws IOException {
 		if (args.length < 3){
 			System.out.println("Please, specify parameters: <amount of test data>, <file>, <format>");
+			return;
 		}
 		
 		int amount = Integer.parseInt(args[0]);
