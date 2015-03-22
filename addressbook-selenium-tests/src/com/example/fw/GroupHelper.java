@@ -1,8 +1,15 @@
 package com.example.fw;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
 import com.example.tests.GroupData;
 import com.example.utils.SortedListOf;
 
@@ -35,6 +42,7 @@ public class GroupHelper extends HelperBase{
 	
 	public GroupHelper createGroup(GroupData group) {
 		manager.navigateTo().groupsPage();
+		waitPage();
 		initGroupCreation();
 		fillGroupForm(group);
 		submitGroupCreation();
@@ -42,7 +50,7 @@ public class GroupHelper extends HelperBase{
     	rebuildCach();
     	return this;
 	}
-	
+		
 	public GroupHelper modifyGroup(int index, GroupData group) {
 		initGroupModification(index);
 		fillGroupForm(group);
@@ -109,5 +117,13 @@ public class GroupHelper extends HelperBase{
 		return this;
 	}
 
+	private void waitPage() {
+			Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+					.withMessage("Element was not found").withTimeout(20, TimeUnit.SECONDS)
+					.pollingEvery(1, TimeUnit.SECONDS);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.name("delete")));
+		}
+		
+	}
 
-}
+

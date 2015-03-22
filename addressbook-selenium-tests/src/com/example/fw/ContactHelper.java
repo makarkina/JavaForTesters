@@ -1,9 +1,15 @@
 package com.example.fw;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
 import com.example.tests.ContactData;
 import com.example.utils.ListOf;
 
@@ -42,6 +48,7 @@ public class ContactHelper extends HelperBase{
 	public ContactHelper createContact(ContactData contact) {
 		manager.navigateTo().mainPage();
 		gotoContactPage();
+		waitPage();
 		filloutContactForm(contact);
 	    submitContactCreation();
 	    returnToMainPage();
@@ -122,6 +129,13 @@ public class ContactHelper extends HelperBase{
 		click(By.cssSelector("#content input[value='Delete']"));
 		cachedContacts = null;
 		return this;
+	}
+	
+	private void waitPage() {
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withMessage("Element was not found").withTimeout(20, TimeUnit.SECONDS)
+				.pollingEvery(1, TimeUnit.SECONDS);
+			    wait.until(ExpectedConditions.presenceOfElementLocated(By.name("submit")));
 	}
 	
 }

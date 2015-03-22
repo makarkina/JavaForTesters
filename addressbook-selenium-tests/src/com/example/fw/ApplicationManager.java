@@ -1,6 +1,7 @@
 package com.example.fw;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -20,18 +21,31 @@ public class ApplicationManager {
 
 	public ApplicationManager(Properties properties){
 		
-		File file = new File("C:/User/Anna/Downloads/chromedriver_win32/chromedriver.exe");
-		System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+		List<String> path = new ArrayList<String>();
+		path.add("C:/Users/Anna/Downloads/IEDriverServer_Win32_2.45.0/IEDriverServer.exe");
+		path.add("C:/Users/Anna/Downloads/chromedriver_win32/chromedriver_win32/chromedriver.exe");
+		
+		List<String> webDriver = new ArrayList<String>();
+		webDriver.add("webdriver.ie.driver");
+		webDriver.add("webdriver.chrome.driver");
 		
 		this.properties = properties;
 		String browser = properties.getProperty("browser");
+		
 		if("firefox".equals(browser)){
 			driver = new FirefoxDriver();
 		}
 		
+		else if("ie".equals(browser)){
+			System.setProperty(webDriver.get(0), path.get(0));
+			driver = new InternetExplorerDriver();
+		}
+		
 		else if("chrome".equals(browser)){
+			System.setProperty(webDriver.get(1), path.get(1));
 			driver = new ChromeDriver();
 		}
+		
 		else{
 			throw new Error("Unsupported browser" + browser);
 		}
