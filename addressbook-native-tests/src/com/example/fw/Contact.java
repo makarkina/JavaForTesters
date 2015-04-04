@@ -1,6 +1,6 @@
 package com.example.fw;
 
-public class Contact {
+public class Contact implements Comparable <Contact>{
 
 	private String firstName;
 	private String lastName;
@@ -55,7 +55,21 @@ public class Contact {
 			return false;
 		return true;
 	}
+
+	public Contact withFirstName(String firstName) {
+		this.firstName = firstName;
+		return this;
+	}
 	
-	
+	public Contact withLastName(String lastName) {
+		this.lastName = lastName;
+		return this;
+	}
+
+	@Override
+	public int compareTo(Contact other) {
+		String s = this.firstName+this.lastName;
+		return s.compareTo((other.firstName + other.lastName));
+	}
 
 }
