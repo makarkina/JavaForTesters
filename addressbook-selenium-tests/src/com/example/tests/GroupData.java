@@ -1,21 +1,22 @@
 package com.example.tests;
 
-public class GroupData implements Comparable<GroupData>{
-	
+public class GroupData implements Comparable<GroupData> {
+
+	private String id;
 	private String name;
 	private String header;
 	private String footer;
 
 	public GroupData() {
-	
+
 	}
-	
+
 	public GroupData(String groupname, String header, String footer) {
 		this.name = groupname;
 		this.header = header;
 		this.footer = footer;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "GroupData [name=" + name + "]";
@@ -25,7 +26,7 @@ public class GroupData implements Comparable<GroupData>{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		//result = prime * result + ((name == null) ? 0 : name.hashCode());
+		// result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -51,6 +52,11 @@ public class GroupData implements Comparable<GroupData>{
 		return this.name.toLowerCase().compareTo(other.name.toLowerCase());
 	}
 
+	public GroupData withId(String id) {
+		this.id = id;
+		return this;
+	}
+
 	public GroupData withName(String name) {
 		this.name = name;
 		return this;
@@ -65,6 +71,10 @@ public class GroupData implements Comparable<GroupData>{
 		this.footer = footer;
 		return this;
 	}
+		
+	public String getId() {
+		return id;
+	}
 
 	public String getName() {
 		return name;
@@ -77,5 +87,22 @@ public class GroupData implements Comparable<GroupData>{
 	public String getFooter() {
 		return footer;
 	}
-		
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setHeader(String header) {
+		this.header = header;
+	}
+
+	public void setFooter(String footer) {
+		this.footer = footer;
+	}
+	
+
 }
