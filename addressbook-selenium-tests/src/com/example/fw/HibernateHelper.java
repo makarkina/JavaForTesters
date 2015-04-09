@@ -14,6 +14,7 @@ public class HibernateHelper extends HelperBase {
 		super(manager);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<GroupData> listGroups() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction trans = session.beginTransaction();
