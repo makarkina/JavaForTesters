@@ -7,39 +7,41 @@ import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.example.utils.ListOf;
-import com.example.utils.SortedListOf;
+public class ContactCreationTests extends TestBase {
 
-public class ContactCreationTests extends TestBase{
-	
 	@DataProvider
-	public Iterator<Object[]> contactsFromFile() throws IOException{
-		return wrapContactsForDataProvider(loadContactsFromXmlFile(new File("contacts.xml"))).iterator();
+	public Iterator<Object[]> contactsFromFile() throws IOException {
+		return wrapContactsForDataProvider(
+				loadContactsFromXmlFile(new File("contacts.xml"))).iterator();
 	}
-	
-	@Test(dataProvider = "contactsFromFile")
-	public void testContactCreationWithValidData(ContactData contact) throws Exception{
-	
-		// save old state
-		
-		ListOf<ContactData> oldList = appl.getContactHelper().getContacts();
-		
-		//actions
-		appl.getContactHelper().createContact(contact);
-    
-		// save new state
-		ListOf<ContactData> newList = appl.getContactHelper().getContacts();
-		SortedListOf<ContactData> newSortedList = new SortedListOf<ContactData>(newList);
-		SortedListOf<ContactData> oldSortedList = new SortedListOf<ContactData>(oldList.withAdded(contact));
-    
-		// compare states      
-		assertThat(newSortedList, equalTo(oldSortedList));
-  }
-  
-}
 
+	@Test(dataProvider = "contactsFromFile")
+	public void testContactCreationWithValidData(ContactData contact)
+			throws Exception {
+
+		// save old state
+		List<ContactData> oldList 
+			= appl.getHibernateHelper().listContacts();
+
+		// actions
+		appl.getContactHelper().createContact(contact);
+
+		// save new state
+		List<ContactData> newList = appl.getHibernateHelper().listContacts();
+		
+		// compare states
+			Collections.sort(newList);
+			oldList.add(contact);
+			Collections.sort(oldList);
+		assertThat(newList, equalTo(oldList));
+		
+	}
+
+}
