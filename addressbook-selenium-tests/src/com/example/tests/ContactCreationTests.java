@@ -29,20 +29,17 @@ public class ContactCreationTests extends TestBase {
 	public void testContactCreationWithValidData(ContactData contact)
 			throws Exception {
 		
-		List<ContactData> oldList = appl.getModel().getContacts();
-		//System.out.println("old " + oldList.size());
-		System.out.println("model  " + oldList);
-		System.out.println("DB " + appl.getHibernateHelper().listContacts());
-		System.out.println("GUI " + appl.getContactHelper().getUIContacts());
-
 		appl.getContactHelper().createContact(contact);
 		
-		System.out.println("model1 " + appl.getModel().getContacts());
-		System.out.println("DB1 " + appl.getHibernateHelper().listContacts());
-		System.out.println("GUI1 " + appl.getContactHelper().getUIContacts());
-					
-		assertThat(appl.getModel().getContacts(), equalTo(appl.getHibernateHelper().listContacts()));
-		assertThat(appl.getModel().getContacts(), equalTo(appl.getContactHelper().getUIContacts()));
+		if (wantToCheck()){
+			if("yes".equals(appl.getProperty("check.db"))){
+				assertThat(appl.getModel().getContacts(), equalTo(appl.getHibernateHelper().listContacts()));
+			}
+			if("yes".equals(appl.getProperty("check.ui"))){
+				assertThat(appl.getModel().getContacts(), equalTo(appl.getContactHelper().getUIContacts()));
+			}
+		}
+			
 	}
 
 	

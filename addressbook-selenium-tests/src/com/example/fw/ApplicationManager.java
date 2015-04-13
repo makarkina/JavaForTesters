@@ -104,6 +104,11 @@ public class ApplicationManager {
 		}
 		return hibernateHelper;
 	}
+	
+	public String getProperty(String key){
+		return properties.getProperty(key);
+		
+	}
 }
 
 

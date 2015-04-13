@@ -14,7 +14,9 @@ import com.example.fw.ApplicationManager;
 public class TestBase {
 
 	static protected ApplicationManager appl;
-
+	private int checkCounter;
+	private int checkFrequency;
+	
 	@BeforeTest
 	public void setUp() throws Exception {
 		String configFile = System.getProperty("configFile",
@@ -22,6 +24,19 @@ public class TestBase {
 		Properties properties = new Properties();
 		properties.load(new FileReader(new File(configFile)));
 		appl = new ApplicationManager(properties);
+		checkCounter = 0;
+		checkFrequency = Integer.parseInt(properties.getProperty("check.frequency", "0"));
+	}
+	
+	protected boolean wantToCheck(){
+		checkCounter++;
+		if (checkCounter > checkFrequency){
+			checkCounter = 0;
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	@AfterTest
