@@ -1,5 +1,6 @@
 package com.example.fw;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
 import com.example.tests.ContactData;
-import com.example.utils.ListOf;
+import com.example.utils.SortedListOf;
 
 public class ContactHelper extends WebDriverHelperBase {
 
@@ -19,17 +20,9 @@ public class ContactHelper extends WebDriverHelperBase {
 		super(manager);
 	}
 
-	private ListOf<ContactData> cachedContacts;
-
-	public ListOf<ContactData> getContacts() {
-		if (cachedContacts == null) {
-			rebuildCach();
-		}
-		return new ListOf<ContactData>(cachedContacts);
-	}
-
-	private void rebuildCach() {
-		cachedContacts = new ListOf<ContactData>();
+	public List<ContactData> getUIContacts() {
+		SortedListOf<ContactData> contacts = new SortedListOf<ContactData>();
+		//List<ContactData> contacts = new ArrayList<ContactData>();
 
 		manager.navigateTo().mainPage();
 		List<WebElement> rows = driver.findElements(By
@@ -41,12 +34,13 @@ public class ContactHelper extends WebDriverHelperBase {
 			String lastName = row.findElement(By.xpath(".//td[2]")).getText();
 			String emailPrime = row.findElement(By.xpath(".//td[4]")).getText();
 			String homePhone = row.findElement(By.xpath(".//td[5]")).getText();
-			cachedContacts.add(new ContactData().withFirstName(firstName)
+			contacts.add(new ContactData().withFirstName(firstName)
 					.withLastName(lastName).withEmailPrime(emailPrime)
 					.withHomePhone(homePhone));
 		}
+		return contacts;
 	}
-
+		
 	public ContactHelper createContact(ContactData contact) {
 		manager.navigateTo().mainPage();
 		gotoContactPage();
@@ -54,7 +48,7 @@ public class ContactHelper extends WebDriverHelperBase {
 		filloutContactForm(contact);
 		submitContactCreation();
 		returnToMainPage();
-		rebuildCach();
+		manager.getModel().addContact(contact);
 		return this;
 	}
 
@@ -63,7 +57,7 @@ public class ContactHelper extends WebDriverHelperBase {
 		filloutContactForm(contact);
 		submitContactModification();
 		returnToMainPage();
-		rebuildCach();
+		manager.getModel().removeContact(index).addContact(contact);
 		return this;
 	}
 
@@ -71,7 +65,7 @@ public class ContactHelper extends WebDriverHelperBase {
 		initContactModification(index);
 		submitContactDeletion();
 		returnToMainPage();
-		rebuildCach();
+		manager.getModel().removeContact(index);
 		return this;
 	}
 
@@ -84,7 +78,6 @@ public class ContactHelper extends WebDriverHelperBase {
 
 	public ContactHelper submitContactCreation() {
 		click(By.name("submit"));
-		cachedContacts = null;
 		return this;
 	}
 
@@ -123,13 +116,11 @@ public class ContactHelper extends WebDriverHelperBase {
 
 	public ContactHelper submitContactModification() {
 		click(By.cssSelector("#content input[value='Update']"));
-		cachedContacts = null;
 		return this;
 	}
 
 	public ContactHelper submitContactDeletion() {
 		click(By.cssSelector("#content input[value='Delete']"));
-		cachedContacts = null;
 		return this;
 	}
 

@@ -94,12 +94,8 @@ public class ContactData implements Comparable<ContactData> {
 
 	@Override
 	public int compareTo(ContactData other) {
-		String s = this.firstName + this.lastName + this.emailPrime
-				+ this.homePhone;
-		return s.toLowerCase()
-				.compareTo(
-						(other.firstName + other.lastName + other.emailPrime + other.homePhone)
-								.toLowerCase());
+		String s = this.firstName + this.lastName;
+		return s.compareTo((other.firstName + other.lastName));
 	}
 
 	public ContactData withFirstName(String firstName) {

@@ -11,8 +11,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hamcrest.Matcher;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import com.example.utils.SortedListOf;
 
 public class ContactCreationTests extends TestBase {
 
@@ -25,23 +28,27 @@ public class ContactCreationTests extends TestBase {
 	@Test(dataProvider = "contactsFromFile")
 	public void testContactCreationWithValidData(ContactData contact)
 			throws Exception {
+		
+		List<ContactData> oldList = appl.getModel().getContacts();
+		//System.out.println("old " + oldList.size());
+		System.out.println("model  " + oldList);
+		System.out.println("DB " + appl.getHibernateHelper().listContacts());
+		System.out.println("GUI " + appl.getContactHelper().getUIContacts());
 
-		// save old state
-		List<ContactData> oldList 
-			= appl.getHibernateHelper().listContacts();
-
-		// actions
 		appl.getContactHelper().createContact(contact);
-
-		// save new state
-		List<ContactData> newList = appl.getHibernateHelper().listContacts();
 		
-		// compare states
-			Collections.sort(newList);
-			oldList.add(contact);
-			Collections.sort(oldList);
-		assertThat(newList, equalTo(oldList));
-		
+		System.out.println("model1 " + appl.getModel().getContacts());
+		System.out.println("DB1 " + appl.getHibernateHelper().listContacts());
+		System.out.println("GUI1 " + appl.getContactHelper().getUIContacts());
+					
+		assertThat(appl.getModel().getContacts(), equalTo(appl.getHibernateHelper().listContacts()));
+		assertThat(appl.getModel().getContacts(), equalTo(appl.getContactHelper().getUIContacts()));
 	}
 
+	
+
+	
+		
 }
+
+

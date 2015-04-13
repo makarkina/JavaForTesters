@@ -19,9 +19,16 @@ public class ApplicationManager {
 	private ContactHelper contactHelper;
 	private Properties properties;
 	private HibernateHelper hibernateHelper;
+	private ApplicationModel model;
 
 	public ApplicationManager(Properties properties){
 		this.properties = properties;
+		model = new ApplicationModel();
+		model.setContacts(getHibernateHelper().listContacts());
+	}
+	
+	public ApplicationModel getModel(){
+		return model;
 	}
 	
 	public void stop() {
