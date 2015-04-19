@@ -1,6 +1,5 @@
 package com.example.fw;
 
-//import org.apache.james.mime4j.message.Message;
 import java.util.Properties;
 
 import javax.mail.Flags;

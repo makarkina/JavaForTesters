@@ -29,14 +29,14 @@ public class SignupTest extends TestBase {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void newUserShouldSignUp() {
 		accHelper.signUp(user);
 		accHelper.login(user);
 		assertThat(accHelper.loggedUser(), equalTo(user.login));
 	}
 	
-	//@Test
+	@Test
 	public void existUserShouldNotSignUp() {
 		try {
 			accHelper.signUp(user);

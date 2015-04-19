@@ -22,7 +22,7 @@ public class AccountHelper extends WebDriverHelperBase {
 		type(By.name("email"), user.email);
 		click(By.cssSelector("input.button"));
 		
-		WebElement errorMessage = findElement(By.cssSelector("table.with50 tbody tr td p"));
+		WebElement errorMessage = findElement(By.cssSelector("table.width50 tbody tr td p"));
 		if (errorMessage != null){
 			throw new RuntimeException(errorMessage.getText());
 		}
@@ -60,7 +60,7 @@ public class AccountHelper extends WebDriverHelperBase {
 	
 	public void login(User user) {
 			pause(3000);
-			url = "mantisbt-1.2.19/login_page.php?return=%2Fmantisbt-1.2.19%2Fmantisbt-1.2.19%2Faccount_page.php";
+			url = "/";
 			openUrl(url);
 			pause(2000);
 			type(By.name("username"), user.login);
