@@ -15,7 +15,7 @@ public class JamesHelper extends HelperBase{
 	}
 
 	private void initTelnetSession() {
-		String mailserver = manager.getProperty("mailserver");
+		String mailserver = manager.getProperty("mailserver.host");
 		int port = Integer.parseInt(manager.getProperty("mailserver.adminport"));
 		String login = manager.getProperty("mailserver.adminlogin");
 		String password = manager.getProperty("mailserver.adminpassword");
