@@ -39,8 +39,7 @@ public class GroupHelper extends HelperBase{
 		fillGroupForm(group);
 		waitGroupCreationPage();
 		submitGroupCreation();
-		Thread.sleep(10000);
-    	returnToGroupsPage();
+		returnToGroupsPage();
     	return this;
 	}
 	
