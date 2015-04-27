@@ -1,11 +1,12 @@
 package com.tests.fw;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AppManager {
 	
@@ -14,12 +15,44 @@ public class AppManager {
 	private NavigationHelper navigationHelper;
 	private GroupHelper groupHelper;
 	
-	public AppManager(Properties properties) {
+	public AppManager(Properties properties) throws MalformedURLException {
 		this.properties = properties;
 		
-		String browser = properties.getProperty("browser");
+		DesiredCapabilities capabilities;
+    	String browser = getWebBrowser();
+    	String version = getWebBrowserVersion();
+    	String platform = getPlatform();
     	
-    	if ("firefox".equals(browser)){
+        	if ("firefox".equals(browser)){
+    			capabilities = DesiredCapabilities.firefox();
+    			capabilities.setCapability("version", version);
+    			capabilities.setCapability("platform", platform);
+    			    			
+    		} else if ("chrome".equals(browser)) {
+    			capabilities = DesiredCapabilities.chrome();
+    			capabilities.setCapability("version", version);
+    			capabilities.setCapability("platform", platform);
+    			
+    		} else if ("ie".equals(browser)) {
+    			capabilities = DesiredCapabilities.internetExplorer();
+    			capabilities.setCapability("version", version);
+    			capabilities.setCapability("platform", platform);
+    			
+    		       	    		
+    		} else {
+    			throw new Error ("Unsupported browser: "+ browser);
+    		}
+        	
+			this.driver = new RemoteWebDriver(
+	                new URL("http://makarkina:a1d4cfc1-426c-4ec6-94e0-c5a262b4c95e@ondemand.saucelabs.com:80/wd/hub"),
+	                capabilities);
+			driver.get(properties.getProperty("baseUrl"));
+           	}
+
+		
+		//String browser = properties.getProperty("browser");
+    	
+    	/*if ("firefox".equals(browser)){
     		driver = new FirefoxDriver();
 			    			
 		} else if ("chrome".equals(browser)) {
@@ -31,8 +64,8 @@ public class AppManager {
 		} else {
 			throw new Error ("Unsupported browser: "+ browser);
 		}
-    	driver.get(properties.getProperty("baseUrl"));
-	}
+    	//driver.get(properties.getProperty("baseUrl"));
+	}*/
 	
 	public NavigationHelper navigateTo() 
 	{

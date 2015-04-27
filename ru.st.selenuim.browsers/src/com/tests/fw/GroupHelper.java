@@ -2,15 +2,9 @@ package com.tests.fw;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-
 import com.local.tests.GroupData;
 
 public class GroupHelper extends HelperBase{
@@ -34,13 +28,11 @@ public class GroupHelper extends HelperBase{
 
 	public GroupHelper createGroup(GroupData group) throws InterruptedException {
 		manager.navigateTo().groupsPage();
-		waitGroupListPage();
 		initGroupCreation();
 		fillGroupForm(group);
-		waitGroupCreationPage();
 		submitGroupCreation();
 		returnToGroupsPage();
-    	return this;
+		return this;
 	}
 	
 	//------------------------------------------------------------------------------------------
@@ -67,24 +59,5 @@ public class GroupHelper extends HelperBase{
 		click(By.linkText("group page"));
 		return this;
 	  }
-
-	private void waitGroupListPage() {
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-				.withMessage("Element was not found")
-				.withTimeout(5, TimeUnit.SECONDS)
-				.pollingEvery(1, TimeUnit.SECONDS);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By
-				.name("edit")));
-	}
 	
-	private void waitGroupCreationPage() {
-			Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-					.withMessage("Element was not found")
-					.withTimeout(10, TimeUnit.SECONDS)
-					.pollingEvery(1, TimeUnit.SECONDS);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By
-					.name("submit")));
-	}
-	
-
 }
