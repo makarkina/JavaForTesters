@@ -3,11 +3,13 @@ package com.example.tests;
 import org.testng.annotations.Test;
 
 public class OpenFoldersTest extends TestBase {
-  
+private static final String INBOX = "INBOX";
+
   @Test
   public void test1() throws Exception {
     mail.openFolder("AJAX");
     mail.countMessages();
+    
   }
   
   @Test
