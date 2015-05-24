@@ -7,28 +7,29 @@ import java.util.List;
 import java.util.Properties;
 
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 
 import com.tests.logic.ApplicationManager;
 import com.tests.logic1.ApplicationManager1;
+import com.tests.model.Ride;
 import com.tests.model.User;
 
 public class TestBase {
 
 	static protected ApplicationManager app;
 						
-	@BeforeClass
+	//@BeforeTest
     public void setUp() throws Exception {
     	Properties properties = new Properties();
     	String configFile = System.getProperty("configFile",
-				"applicationFireFox.properties");
+				"applicationChrome.properties");
     	properties.load(new FileReader(new File(configFile)));
     	app = new ApplicationManager1(properties);
     	app.getNavigationHelper().openLoginPage(properties.getProperty("baseUrl"));
    	}	
 	
 	    		
-	@AfterSuite
+	//@AfterSuite
     public void tearDown() throws Exception {
         app.stop();
     }
@@ -39,6 +40,15 @@ public class TestBase {
 			list.add(new Object[]{user});
 		}
 		return list;
+		
+	}
+	
+	public static List<Object[]> wrapRidesForDataProvider(List<Ride> rides) {
+		List<Object[]> list1 = new ArrayList<Object[]>();
+		for (Ride ride : rides){
+			list1.add(new Object[]{ride});
+		}
+		return list1;
 		
 	}
 }

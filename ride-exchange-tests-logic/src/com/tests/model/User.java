@@ -3,20 +3,17 @@ package com.tests.model;
 public class User {
 	private String userName;
 	private String password;
+	private String repeatPassword;
 	private String email;
 	private String phone;
 	private String mobileProvider;
 	private String role;
+	private String botSum;
 	
 	public User() {
 		
 	}
 	
-	/*public User(String userName, String password) {
-		this.userName = userName;
-		this.password = password;
-	}*/
-
 	public String getUserName() {
 		return userName;
 	}
@@ -63,6 +60,22 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getRepeatPassword() {
+		return repeatPassword;
+	}
+
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
+	}
+
+	public String getBotSum() {
+		return botSum;
+	}
+
+	public void setBotSum(String botSum) {
+		this.botSum = botSum;
 	}
 	
 	

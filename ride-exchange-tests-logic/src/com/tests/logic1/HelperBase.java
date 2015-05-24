@@ -70,4 +70,9 @@ public abstract class HelperBase {
 	protected void click(By locator) {
 		driver.findElement(locator).click();
 	}
+
+	public void FormEdition() {
+		// TODO Auto-generated method stub
+		
+	}
 }
